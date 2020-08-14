@@ -1,0 +1,124 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+
+<form action="/admin/recipes" method="POST">
+    <div class="title-create">
+        <div>Criando receita</div>
+        <button type="submit">Salvar receita</button>
+    </div>
+
+    <div class="card">
+        <div id="item">Imagem da receita</div>
+        <div>
+            <input 
+                type="text"
+                name="image"
+                placeholder="http://"
+                value="{{recipe.image}}"
+            >
+        </div>
+
+        <div id="item">Nome da receita</div>
+        <div>
+            <input 
+                type="text"
+                name="title"
+            >
+        </div>
+
+        <div id="item">Chef</div>
+        <div>
+            <select name="chef_id">
+                {% for chef in chefsOptions %}
+                <option value="{{chef.id}}">
+                    {{chef.name}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div id="item">Ingredientes</div>
+
+        <div id="ingredients">
+            <div class="ingredient">
+                <input
+                    type="text"
+                    name="ingredients"
+                    placeholder="Ingrediente"
+                    value={{ingredient}}
+                >
+            </div>
+        </div>
+
+
+        <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
+
+        <div id="item">Modo de preparo</div>
+
+        <div id="steps">
+            <div class="step">
+                        <input 
+                            type="text"
+                            name="preparation"
+                            placeholder="Passo"
+                            value={{preparation}}
+                        >
+            </div>
+        </div>
+
+        <button type="button" class="add-step">Adicionar novo passo</button>
+    
+        <div id="item">Informações adicionais</div>
+            <div>
+                <textarea name="information" id="text" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function addIngredient(){
+            const ingredients = document.querySelector("#ingredients");
+            const fieldContainer = document.querySelectorAll(".ingredient");
+
+            const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+
+            if(newField.children[0].value=="") return false;
+
+            newField.children[0].value="";
+
+            ingredients.appendChild(newField)
+        }
+
+        const buttonAddIngredient = document.querySelector(".add-ingredient")
+        buttonAddIngredient.addEventListener("click", addIngredient)
+
+    </script>
+
+    <script>    
+
+        function addStep(){
+            const steps = document.querySelector("#steps");
+            const fieldContainer = document.querySelectorAll(".step");
+
+            const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+
+            if(newField.children[0].value=="") return false;
+
+            newField.children[0].value="";
+
+            steps.appendChild(newField)
+        }
+
+        const buttonAddStep = document.querySelector(".add-step")
+        buttonAddStep.addEventListener("click", addStep)
+
+    </script>
+
+    
+</form>
+
+
+
+{% endblock content %}

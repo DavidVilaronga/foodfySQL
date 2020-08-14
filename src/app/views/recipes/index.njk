@@ -1,0 +1,28 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<section>
+    <div class="index">
+        <div class="manager-index">
+            Gerenciar receitas
+        </div>
+        <a href="/admin/recipes/create">Nova</a>
+    </div>
+</section>
+
+<div class="content">
+    {% for recipe in recipes %}
+    <div class="item">
+        <div>
+            <img src="..{{recipe.image}}" alt="asinhas">
+        </div>
+        <div>
+            <h1>{{recipe.title}}</h1>
+            <h2>{{recipe.chef_name}}</h2>
+            <a href="/admin/recipes/{{recipe.id}}">Visualisar</a>
+        </div> 
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
