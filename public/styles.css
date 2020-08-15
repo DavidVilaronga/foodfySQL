@@ -14,14 +14,27 @@ body{
 header{
     background-color: #111111;
     display: grid;
-    grid-template-columns: 141px 99px 700px;;
+    grid-template-columns: 940px;;
     grid-template-rows: 80px;
     justify-content: center;
 }
 
-header div img {
-    padding-top: 27px;
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: left;
 }
+
+.link a:first-child {
+    margin-right: 50px;
+}
+
+.link a:nth-child(2) {
+    margin-right: 30px;
+}
+/*header div img {
+    padding-top: 27px;
+}*/
 
 header img {
     width: 90.6px;
@@ -35,11 +48,16 @@ header a {
     font-size: 15px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    padding-top: 31px;
+    /*padding-top: 31px;*/
 }
 
 #header {
     margin-top: 31px;
+}
+
+.link a.active {
+    font-weight: bold;
+    color: #ffffff;
 }
 
 /* index recipes */

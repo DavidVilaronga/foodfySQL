@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
     <div class="title-edit">
         <div>Editando receita</div>
         <button id="delete-button" form="delete" type="submit">Deletar</button>
@@ -26,15 +25,13 @@
     </form>
 
     <script>
-
         const deleteButton = document.querySelector("#delete")
-        deleteButton.addEventListener("submit", function(event){
-            const confirmation = confirm("Deseja deletar?")
-            if(!confirmation){
-                event.preventDefault()
-            }
-        })
-
+            deleteButton.addEventListener("submit", function(event){
+                const confirmation = confirm("Deseja deletar?")
+                if(!confirmation){
+                    event.preventDefault()
+                }
+            })
     </script>
 
 {% endblock content %}
