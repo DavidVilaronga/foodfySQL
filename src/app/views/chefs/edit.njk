@@ -9,9 +9,10 @@
         <button type="submit" form="put">Salvar chef</button>
     </div>
 
-    <form action="/admin/chefs?_method=PUT" id="put" method="POST">
+    <form action="/admin/chefs?_method=PUT" id="put" method="POST" enctype="multipart/form-data">
 
         <input type="hidden" name="id" value={{chef.id}}>
+        <input type="hidden" name="path" value={{chef.path}}>
 
         {% include 'chefs/fields.njk' %}
 

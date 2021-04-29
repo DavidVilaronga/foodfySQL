@@ -11,18 +11,29 @@
 </section>
 
 <div class="content">
-    {% for recipe in recipes %}
+
+        {% for recipe in recipes %}
+        
+    
+        
     <div class="item">
+        {% for path in paths %}
+        {% if recipe.id == path.recipe_id%}
         <div>
-            <img src="..{{recipe.image}}" alt="asinhas">
+            <img src="{{path.src}}" alt="{{path.recipe_id}}">
         </div>
+        {% endif %}
+        {% endfor %}
+        
+        
         <div>
             <h1>{{recipe.title}}</h1>
             <h2>{{recipe.chef_name}}</h2>
             <a href="/admin/recipes/{{recipe.id}}">Visualisar</a>
         </div> 
+
     </div>
-    {% endfor %}
+        {% endfor %}
 </div>
 
 {% endblock content %}

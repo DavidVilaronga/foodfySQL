@@ -2,13 +2,14 @@
 
 {% block content %}
 
-<form action="/admin/chefs" method="POST">
+<form action="/admin/chefs" method="POST" enctype="multipart/form-data">
     <div class="title-create">
         <div>Criando chef</div>
         <button type="submit">Salvar chef</button>
     </div>
 
         {% include 'chefs/fields.njk' %}
+   
 
 </form>
 

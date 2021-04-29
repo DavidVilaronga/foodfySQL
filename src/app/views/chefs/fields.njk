@@ -10,12 +10,26 @@
         </div>
 
         <div id="item">Avatar</div>
+        {%if chef.path %}
         <div>
             <input 
                 type="text"
-                name="avatar_url"
-                value="{{chef.avatar_url}}"
+                name="path"
+                value="{{chef.path}}"
+            >
+        </div>
+        {% endif %}
+        <div>
+            <div id="photo-upload">
+                <input 
+                    id="photo-input"
+                    type="file" 
+                    name="photo"
+                    accept="image/*"
+                    onchange="PhotoAvatar.handleFileInput(event)"
                 >
+                <p>Enviar Avatar</p>
+            </div>
         </div>
     
 </div>

@@ -9,7 +9,18 @@
 
 <div class="detail">
     <div class="detail_img">
-        <img src="{{recipe.image}}" alt="{{recipe.title}}">
+        <img src="{{files[0].src}}" alt="{{recipe.title}}">
+    </div>
+
+    <div class="detail_img_preview">
+        {% for image in files %}
+            <img src="{{image.src}}" alt="{{image.name}}" 
+                {% if loop.index0 == 0 %}
+                class="active"
+                {% endif %}
+                onclick="ImageDetail.setImage(event)"
+            >
+        {% endfor %}
     </div>
 
     <div class="detail_recipe">

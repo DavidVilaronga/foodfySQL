@@ -9,7 +9,7 @@
 
 <div class="detail_chef">
     <div class="detail_avatar">
-        <img src="{{chef.avatar_url}}" alt="{{chef.name}}">
+        <img src="{{avatarPath.src}}" alt="{{chef.name}}">
     </div>
 
     <div class="detail_recipe">
@@ -30,18 +30,28 @@
 </section>
 
 <div class="content">
-    {% for recipe in recipes %}
+    
+        {% for recipe in recipes %}
+
     <div class="item">
+        {%for path in paths%}
+            {%if recipe.id == path.recipe_id%}
         <div>
-            <img src="{{recipe.image}}" alt="{{recipe.title}}">
+
+                    <img src="{{path.src}}" alt="foto">
+        
         </div>
+            {%endif%}
+            {%endfor%}
         <div>
             <h1>{{recipe.title}}</h1>
             <h2>{{recipe.recipe_by}}</h2>
             <a href="/admin/recipes/{{recipe.id}}">Visualisar</a>
         </div> 
+
     </div>
     {% endfor %}
+            
 </div>
 
-{%endblock%}
+{%endblock content%}

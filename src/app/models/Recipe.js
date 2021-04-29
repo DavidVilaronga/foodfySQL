@@ -2,32 +2,25 @@ const {date} = require('../../lib/utils')
 const db = require('../../config/db')
 
 module.exports = {
-    all(callback) {
-        db.query(`
+    all() {
+        return db.query(`
         SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`, 
-        (err, results)=>{
-            if (err) throw `Database Error! ${err}`
-
-        callback(results.rows)
-        })
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`)
     },
-    create(data, callback) {
+    create(data) {
         const query = `
             INSERT INTO recipes (
-                image,
                 title,
                 chef_id,
                 ingredients,
                 preparation,
                 information,
                 created_at
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+            ) VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING id
         `
         const values = [
-            data.image,
             data.title,
             data.chef_id,
             data.ingredients,
@@ -36,44 +29,29 @@ module.exports = {
             date(Date.now()).iso
         ]
 
-        db.query(query, values, function(err, results){
-            if(err) throw `Database Error! ${err}`
-
-            callback(results.rows[0])
-        })
+        return db.query(query, values)
     },
-    find(id, callback) {
-        db.query(`
+    find(id) {
+        return db.query(`
         SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE recipes.id = $1`, [id], (err, results)=>{
-            if (err) throw `Database Error! ${err}`
-
-            callback(results.rows[0])
-            }
-        )
+        WHERE recipes.id = $1`, [id])
     },
-    chefsSelectOptions(callback) {
-        db.query(`SELECT name, id FROM chefs`, (err, results)=>{
-            if(err) throw `Database Error! ${err}`
-
-            callback(results.rows)
-        })
+    chefsSelectOptions() {
+        return db.query(`SELECT name, id FROM chefs`)
     },
-    update(data, callback) {
+    update(data) {
         const query = `
             UPDATE recipes SET
-                image=($1),
-                title=($2),
-                ingredients=($3),
-                preparation=($4),
-                information=($5)
-            WHERE id = $6
+                title=($1),
+                ingredients=($2),
+                preparation=($3),
+                information=($4)
+            WHERE id = $5
         `
 
         const values = [
-            data.image,
             data.title,
             data.ingredients,
             data.preparation,
@@ -81,11 +59,7 @@ module.exports = {
             data.id
         ]
 
-        db.query(query, values, (err)=>{
-            if(err) throw `Database Error! ${err}`
-
-            callback()
-        })
+        return db.query(query, values)
     },
     delete(id, callback) {
         db.query(`DELETE FROM recipes WHERE id = $1`, [id], (err)=>{
